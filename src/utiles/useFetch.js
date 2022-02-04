@@ -5,6 +5,9 @@ const useFetch = () => {
     // Streaming Data state as Array
   const [streamingData, setstreamingData] = useState();
 
+   // Loading State  as Boolean
+   const [loading, setloading] = useState(true);
+
  
 
 
@@ -21,6 +24,7 @@ const useFetch = () => {
             return Promise.reject(error);
         }
         setstreamingData(data)
+        setloading(false)
        
     })
     .catch(error => {
@@ -29,8 +33,8 @@ const useFetch = () => {
        
     });
   },[]);
-
-  return [streamingData];
+    //  return states as Array
+  return [streamingData,loading];
 };
 
 
