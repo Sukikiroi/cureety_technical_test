@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useFriendStatus = (friendID) => {
+const useFetch = () => {
   const [streamingData, setstreamingData] = useState();
 
   useEffect(() => {
@@ -9,3 +9,7 @@ const useFriendStatus = (friendID) => {
 
   return streamingData;
 };
+
+
+// Exporting the hook
+export default useFetch
