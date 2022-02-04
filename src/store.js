@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-
+import { configureStore } from "@reduxjs/toolkit";
+import streamingdataReducer from "./slices/streamingData/streamingdataSlice";
 export const store = configureStore({
-  reducer: {},
-})
+  reducer: { streamingdataReducer },
+});
