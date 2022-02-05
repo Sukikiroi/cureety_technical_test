@@ -2,11 +2,19 @@ import React from 'react';
 
 import { makeStyles } from '@mui/styles';
 
+// Card Component
+import PokemonCard from "./pokemonCard"
+
 const PokemonContainer = () => {
     const classes = useStyles();
   return <div className={classes.root}> 
 
-      hh
+ <PokemonCard/>
+ <PokemonCard/>
+ <PokemonCard/>
+ <PokemonCard/>
+ <PokemonCard/>
+ <PokemonCard/>
   </div>;
 };
 
@@ -19,12 +27,11 @@ export default PokemonContainer;
 
 const useStyles = makeStyles({
     root: {
-      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-      border: 0,
-      borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-      color: 'white',
-      height: 48,
-      padding: '0 30px',
+     width:'100%',
+     height:'100%',
+     padding:'40px',
+     display:'grid',
+    
+     gridTemplateColumns:'auto auto auto'
     },
   });
