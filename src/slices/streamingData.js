@@ -30,11 +30,11 @@ export const streamingdataSlice = createSlice({
       saveState(action.payload[0].key, action.payload[0]);
     },
     updateDSLConfiguration: (state, action) => {
-      (state.BaseUrl = ""),
-        (state.authentificationHeader = ""),
-        (state.compressionTimeoutDelay = ""),
-        (state.maximumSize = ""),
-        (state.protectedFromCleaning = "");
+      // state.BaseUrl = "t",
+      //   state.authentificationHeader = "",
+      //   state.compressionTimeoutDelay = "",
+      //   state.maximumSize = "",
+      //   state.protectedFromCleaning = ""
     },
   },
 });

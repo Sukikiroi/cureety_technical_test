@@ -9,8 +9,7 @@ const Pokemone = ({pokemonname}) => {
   console.log(streamingdata)
     return  <div>
 
-<h1>Balbasor</h1>
-<h1>{pokemonname}</h1>
+ 
   </div>
 };
 
