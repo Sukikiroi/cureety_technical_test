@@ -141,6 +141,15 @@ let data = [
 
   var end = window.performance.now();
   console.log(`Execution time: ${end - start} ms`);
+  let ExcutionTime=end - start
+
+  //When compression takes more than 200milliseconds
+  if(ExcutionTime>200)
+        // return the uncompressed data
+      return value
+    //  if compression is fast  return the Copressed value
+  else
+      return compData
 };
 
-executionTimeCalculator(data)
+console.log(executionTimeCalculator(data))
