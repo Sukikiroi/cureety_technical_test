@@ -4,8 +4,6 @@ import sizeof from "object-sizeof";
 //Compress Package
 import {executionTimeCalculator}  from "./helpers.js"
  
-//  DSL Configuration
-import {protectedFromCleaning} from './global'
 
 export const loadState = (key) => {
   try {
@@ -19,15 +17,15 @@ export const loadState = (key) => {
   }
 };
 
-export const saveState = (key, value) => {
+export const saveState = (key, value,compressionTimeoutDelay,protectedFromCleaning) => {
   try {
-    executionTimeCalculator(value)
+    executionTimeCalculator(value,compressionTimeoutDelay)
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     if (error === "QUOTA_EXCEEDED_ERR") {
       alert("Quota exceeded!"); //data wasn't successfully saved due to quota exceed so throw an error
       // Delete And Remplace Algorithme
-      delteandreplace(value);
+      delteandreplace(value,protectedFromCleaning);
     }
   }
 };
@@ -46,7 +44,7 @@ export const KeyBigerSpace = (key, value) => {
   return KeyofBigerItem;
 };
 
-export const delteandreplace = (value) => {
+export const delteandreplace = (value,protectedFromCleaning) => {
  
   // This How Much space Needed for the New Value
   let spaceNeeded = sizeof(value);

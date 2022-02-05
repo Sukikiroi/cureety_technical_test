@@ -3,10 +3,19 @@ import { createSlice } from '@reduxjs/toolkit'
 // Localstorage package
 import {saveState} from "../utiles/localstorage"
 
+// Envirenemnt Global Varibale
+import {BaseUrl,authentificationHeader,compressionTimeoutDelay,maximumSize,protectedFromCleaning} from "../utiles/global"
+
 const initialState = {
   streamingdata: []  ,
-};
+  BaseUrl:BaseUrl,
+  authentificationHeader:authentificationHeader,
+  compressionTimeoutDelay:compressionTimeoutDelay,
+  maximumSize:maximumSize,
+  protectedFromCleaning:protectedFromCleaning,
 
+};
+console.log(initialState)
 export const streamingdataSlice = createSlice({
   name: 'streamingdata',
   initialState,
