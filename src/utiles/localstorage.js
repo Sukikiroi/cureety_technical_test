@@ -4,7 +4,8 @@ import sizeof from "object-sizeof";
 //Compress Package
 import {executionTimeCalculator}  from "./helpers.js"
  
-
+//  DSL Configuration
+import {protectedFromCleaning} from './global'
 
 export const loadState = (key) => {
   try {
@@ -46,7 +47,7 @@ export const KeyBigerSpace = (key, value) => {
 };
 
 export const delteandreplace = (value) => {
-  let protectedItems = ["patiens", "doctors"];
+ 
   // This How Much space Needed for the New Value
   let spaceNeeded = sizeof(value);
 
@@ -60,8 +61,8 @@ export const delteandreplace = (value) => {
 
 
     for (let i = 0; (i = KeyBigerSpace(keys[index]).length); i++) {
-      for (let j = 0; (j = protectedItems.length); j++) {
-        if (KeyBigerSpace(keys[index])[i] != protectedItems[j]) {
+      for (let j = 0; (j = protectedFromCleaning.length); j++) {
+        if (KeyBigerSpace(keys[index])[i] != protectedFromCleaning[j]) {
           removeItem(KeyBigerSpace(keys[index])[i]);
           return 1;
         }
