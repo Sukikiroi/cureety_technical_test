@@ -2,6 +2,7 @@ import sizeof from "object-sizeof";
 
 
 //Compress Package
+import {executionTimeCalculator}  from "./helpers.js"
  
 
 
@@ -19,7 +20,7 @@ export const loadState = (key) => {
 
 export const saveState = (key, value) => {
   try {
-    
+    executionTimeCalculator(value)
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     if (error === "QUOTA_EXCEEDED_ERR") {
