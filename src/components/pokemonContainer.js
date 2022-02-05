@@ -5,17 +5,18 @@ import { makeStyles } from '@mui/styles';
 // Card Component
 import PokemonCard from "./pokemonCard"
 
-const PokemonContainer = () => {
+const PokemonContainer = ({data}) => {
     const classes = useStyles();
-  return <div className={classes.root}> 
+  return (
+    <div className={classes.root}>
+      {/* {data.map((item, key) => {
+        return <div key={key}>
+      <PokemonCard/>
 
- <PokemonCard/>
- <PokemonCard/>
- <PokemonCard/>
- <PokemonCard/>
- <PokemonCard/>
- <PokemonCard/>
-  </div>;
+        </div>;
+      })} */}
+    </div>
+  );
 };
 
 export default PokemonContainer;
