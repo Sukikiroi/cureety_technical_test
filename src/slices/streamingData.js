@@ -1,15 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+// Localstorage package
+import {saveState} from "../utiles/localstorage"
+
 const initialState = {
-  streamingdata:[],
-}
+  streamingdata: [],
+};
 
 export const streamingdataSlice = createSlice({
   name: 'streamingdata',
   initialState,
   reducers: {
   addfetchedata:(state,action)=>{
-  state.streamingdata.push(action.payload)
+  state.streamingdata.push(action.payload[0])
+  saveState(action.payload[0].key,action.payload[0])
   }
   },
 })
