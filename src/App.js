@@ -1,25 +1,18 @@
- 
-import './App.css';
+import "./App.css";
 
-import useFetch from "./utiles/useFetch"
+import useFetch from "./utiles/useFetch";
 
-import Pokemone from "./components/pokemone"
+import Pokemone from "./components/pokemone";
 
-
- 
+import MyFancyLoader from "./components/myfancyLoader";
 
 function App() {
-   
-   const [data,error,loading]=useFetch('wormadam')
-   if(!loading){
-    console.log(data)
-   }
+  const [data, error, loading] = useFetch("wormadam");
+  if (!loading) {
+    console.log(data);
+  }
   //  console.log(JSON.parse(localStorage.getItem("data")))
-  return (
-    <div className="App">
-      <Pokemone/>
-    </div>
-  );
+  return <div className="App">{loading ? <MyFancyLoader /> : <></>}</div>;
 }
 
 export default App;
