@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addfetchedata } from "../slices/streamingData";
 
+//Global Base Url
+import {BaseUrl} from "./global";
+
 const useFetch = (query) => {
   // Streaming Data state as Array
   const [streamingData, setstreamingData] = useState();
@@ -16,7 +19,7 @@ const useFetch = (query) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    fetch("https://pokeapi.co/api/v2/pokemon-species/" + query)
+    fetch(BaseUrl + query)
       .then(async (response) => {
         const data = await response.json();
 
