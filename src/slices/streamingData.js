@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import {saveState} from "../utiles/localstorage"
 
 const initialState = {
-  streamingdata: [],
+  streamingdata: []  ,
 };
 
 export const streamingdataSlice = createSlice({

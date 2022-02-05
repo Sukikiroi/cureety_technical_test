@@ -18,6 +18,8 @@ const useFetch = (query) => {
 
   const dispatch = useDispatch();
 
+  
+
   useEffect(() => {
     fetch(BaseUrl + query)
       .then(async (response) => {
