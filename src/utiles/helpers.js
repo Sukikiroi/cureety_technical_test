@@ -1,13 +1,6 @@
 
-
- 
-
- 
- 
-var lzwCompress =require('lzwcompress')
-
-
-
+var lzwCompress =require('lzwcompress') 
+var compressionTimeoutDelay=require('./global')
 
  
 
@@ -131,8 +124,8 @@ let data = [
   console.log(`Execution time: ${end - start} ms`);
   let ExcutionTime=end - start
 
-  //When compression takes more than 200milliseconds
-  if(ExcutionTime>200)
+  //When compression takes more than compressionTimeoutDelay
+  if(ExcutionTime>compressionTimeoutDelay)
         // return the uncompressed data
       return value
     //  if compression is fast  return the Copressed value
