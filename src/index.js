@@ -13,7 +13,7 @@ import ErrorBoundary from "./utiles/errorBoundary";
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <Provider>
+      <Provider store={store}>
         <App />
       </Provider>
     </ErrorBoundary>
