@@ -8,11 +8,15 @@ import reportWebVitals from "./reportWebVitals";
 import { store } from "./store";
 import { Provider } from "react-redux";
 
+// Error Boundary Component To  manage gracefully the case where no Provider is defined.
+import ErrorBoundary from "./utiles/errorBoundary";
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById("root")
 );

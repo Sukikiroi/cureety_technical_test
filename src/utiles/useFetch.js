@@ -18,7 +18,9 @@ const useFetch = (query) => {
 
   const dispatch = useDispatch();
 
-  
+  if(query==undefined){
+    query=''
+  }
 
   useEffect(() => {
     fetch(BaseUrl + query)
@@ -35,12 +37,12 @@ const useFetch = (query) => {
         let payload = [
           {
             key: query,
-            data: data.abilities,
+            data: data,
           },
         ];
 
         dispatch(addfetchedata(payload));
-        setstreamingData(payload);
+        setstreamingData(data);
         setloading(false);
       })
       .catch((error) => {
