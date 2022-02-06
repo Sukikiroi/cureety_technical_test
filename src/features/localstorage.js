@@ -20,7 +20,9 @@ export const loadState = (key) => {
 
 export const saveState = (key, value,compressionTimeoutDelay,protectedFromCleaning) => {
   try {
-    executionTimeCalculator(value,compressionTimeoutDelay)
+    //Result data May be a Compressed or original Data if Compression Delay it pass 200ms
+    let resultdata=executionTimeCalculator(value,compressionTimeoutDelay)
+    console.log(resultdata)
     localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     if (error === "QUOTA_EXCEEDED_ERR") {
@@ -87,18 +89,18 @@ export const updateCachedData = () => {
   for (let index in keys) {
     // Simple GET request using fetch
     fetch(BaseUrl + keys[index]).then((response) => {
-      localStorage.setItem(keys[index], response);
+      localStorage.setItem(keys[index], JSON.stringify(response));
     });
   }
 };  
 
 // Update the Cached Data evry 1 minute
-setInterval(updateCachedData(), 60 * 1000); // 60 * 1000 milsec
+//setInterval(updateCachedData(), 60 * 1000); // 60 * 1000 milsec
 
 // Update the Cached Data In Background
 export const updateRequestedCachedData=(requesteddata)=>{
  // Simple GET request using fetch
  fetch(BaseUrl + requesteddata).then((response) => {
-  localStorage.setItem(requesteddata, response);
+  localStorage.setItem(requesteddata, JSON.stringify(response));
 });
 }

@@ -19,6 +19,7 @@ const initialState = {
   compressionTimeoutDelay: compressionTimeoutDelay,
   maximumSize: maximumSize,
   protectedFromCleaning: protectedFromCleaning,
+  value:0
 };
 console.log(initialState);
 export const streamingdataSlice = createSlice({
@@ -26,9 +27,16 @@ export const streamingdataSlice = createSlice({
   initialState,
   reducers: {
     addfetchedata: (state, action) => {
-      state.streamingdata.push(action.payload[0]);
-      saveState(action.payload[0].key, action.payload[0]);
+      console.log("I am Dispatched")
+      state.streamingdata.push(action.payload[0].data);
+   
+      saveState(action.payload[0].key, action.payload[0].data);
     },
+
+
+
+
+    
     updateDSLConfiguration: (state, action) => {
       // state.BaseUrl = "t",
       //   state.authentificationHeader = "",

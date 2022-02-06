@@ -109,6 +109,7 @@ const executionTimeCalculator = (value, compressionTimeoutDelay) => {
   // task starts
 
   const compressed = lzwCompress.pack(value);
+ 
   // task ends
 
   var end = Date.now();

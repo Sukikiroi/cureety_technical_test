@@ -12,11 +12,11 @@ import {updateCachedData}  from "./features/localstorage"
 
 function App() {
    
-  const [data, error, loading] = useFetch('clefairy');
+ 
  
   return (
     <div className="App">
-      {loading ? <MyFancyLoader /> : <PokemonContainer />}
+      <PokemonContainer />
     </div>
   );
 }
