@@ -59,6 +59,7 @@ const useFetch = (query) => {
           updateRequestedCachedData(query);
         } else {
           dispatch(addfetchedata(payload));
+          
           setstreamingData(data.abilities);
         }
 
