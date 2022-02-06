@@ -46,8 +46,7 @@ const useFetch = (query) => {
         }
 
        
-
-        console.log(IsCached(query));
+ 
 
        
         // If Data Is Cached we load state from Local Storage
@@ -59,6 +58,7 @@ const useFetch = (query) => {
           updateRequestedCachedData(query);
         } else {
           dispatch(addfetchedata(payload));
+          
           setstreamingData(data.abilities);
         }
 

@@ -21,16 +21,17 @@ const initialState = {
   protectedFromCleaning: protectedFromCleaning,
   value:0
 };
-console.log(initialState);
+ 
 export const streamingdataSlice = createSlice({
   name: "streamingdata",
   initialState,
   reducers: {
     addfetchedata: (state, action) => {
       console.log("I am Dispatched")
+      console.log(action.payload[0].key)
       state.streamingdata.push(action.payload[0].data);
    
-      saveState(action.payload[0].key, action.payload[0].data);
+      saveState(action.payload[0].key,action.payload[0].data,state.compressionTimeoutDelay,state.protectedFromCleaning);
     },
 
 
