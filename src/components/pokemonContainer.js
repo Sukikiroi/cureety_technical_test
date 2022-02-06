@@ -1,12 +1,16 @@
 import React from 'react';
 
 import { makeStyles } from '@mui/styles';
+import useFetch from '../features/useFetch'
 
 // Card Component
 import PokemonCard from "./pokemonCard"
 
-const PokemonContainer = ({data}) => {
+const PokemonContainer = () => {
+    const [data, error, loading] = useFetch('charmander');
     const classes = useStyles();
+    console.log(data)
+    console.log(error)
   return (
     <div className={classes.root}>
       {/* {data.map((item, key) => {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 import { addfetchedata } from "../slices/streamingData";
 
 //Global Base Url
@@ -21,14 +21,22 @@ const useFetch = (query) => {
 
   const dispatch = useDispatch();
 
-  if (query == undefined) {
+  if (query === undefined) {
     query = "";
   }
 
   useEffect(() => {
+    
     fetch(BaseUrl + query)
       .then(async (response) => {
         const data = await response.json();
+        let payload = [
+          {
+            key: query,
+            data: data.abilities,
+          },
+        ];
+         
 
         // check for error response
         if (!response.ok) {
@@ -37,23 +45,21 @@ const useFetch = (query) => {
           return Promise.reject(error);
         }
 
-        let payload = [
-          {
-            key: query,
-            data: data,
-          },
-        ];
+       
 
-        dispatch(addfetchedata(payload));
+        console.log(IsCached(query));
 
+       
         // If Data Is Cached we load state from Local Storage
-        if (IsCached) {
+        if (IsCached(query)) {
           // Get The Cached Data
+          console.log(loadState(query));
           setstreamingData(loadState(query));
           // Update The Cached Data In Background
           updateRequestedCachedData(query);
         } else {
-          setstreamingData(data);
+          dispatch(addfetchedata(payload));
+          setstreamingData(data.abilities);
         }
 
         setloading(false);
@@ -62,7 +68,7 @@ const useFetch = (query) => {
         console.error("There was an error!", error);
         seterror(true);
       });
-  }, []);
+  }, [query,dispatch]);
   //  return states as Array
   return [streamingData, error, loading];
 };
