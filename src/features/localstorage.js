@@ -3,8 +3,7 @@ import sizeof from "object-sizeof";
 // Global Variable
 import { BaseUrl } from "./global.js";
 //Compress Package
-import {executionTimeCalculator}  from "./helpers.js"
- 
+import { executionTimeCalculator, compressme } from "./helpers.js";
 
 export const loadState = (key) => {
   try {
@@ -18,23 +17,28 @@ export const loadState = (key) => {
   }
 };
 
-export const saveState = (key,value,compressionTimeoutDelay,protectedFromCleaning) => {
+export const saveState = (
+  key,
+  value,
+  compressionTimeoutDelay,
+  protectedFromCleaning
+) => {
   try {
-    console.log('i saved')
-    //Result data May be a Compressed or original Data if Compression Delay it pass 200ms
-    let resultdata=executionTimeCalculator(value,compressionTimeoutDelay)
-     
-    localStorage.setItem(key, JSON.stringify(value));
+  
+
+    compressme(value);
+  //Result data May be a Compressed or original Data if Compression Delay it pass 200ms
+    setTimeout(() => {
+      localStorage.setItem(key, JSON.stringify(compressedornot()));
+    }, compressionTimeoutDelay);
   } catch (error) {
     if (error === "QUOTA_EXCEEDED_ERR") {
       alert("Quota exceeded!"); //data wasn't successfully saved due to quota exceed so throw an error
       // Delete And Remplace Algorithme
-      delteandreplace(value,protectedFromCleaning);
+      delteandreplace(value, protectedFromCleaning);
     }
   }
 };
-
-
 
 export const KeyBigerSpace = (key, value) => {
   let KeyofBigerItem = [];
@@ -48,8 +52,7 @@ export const KeyBigerSpace = (key, value) => {
   return KeyofBigerItem;
 };
 
-export const delteandreplace = (value,protectedFromCleaning) => {
- 
+export const delteandreplace = (value, protectedFromCleaning) => {
   // This How Much space Needed for the New Value
   let spaceNeeded = sizeof(value);
 
@@ -58,9 +61,6 @@ export const delteandreplace = (value,protectedFromCleaning) => {
   for (let index in keys) {
     items.push(loadState(keys[index]));
     console.log(sizeof(items[index]));
-
-   
-
 
     for (let i = 0; (i = KeyBigerSpace(keys[index]).length); i++) {
       for (let j = 0; (j = protectedFromCleaning.length); j++) {
@@ -74,15 +74,14 @@ export const delteandreplace = (value,protectedFromCleaning) => {
 };
 
 // Function To Know If Data is Being Chached
-export const IsCached=(key)=>{
- if (localStorage.getItem(key)) return true
- else return false
-}
-
+export const IsCached = (key) => {
+  if (localStorage.getItem(key)) return true;
+  else return false;
+};
 
 export const removeItem = (key) => {
-    localStorage.removeItem(key);
-  };
+  localStorage.removeItem(key);
+};
 
 // Function To Update Cached Data as a Crone
 export const updateCachedData = () => {
@@ -93,20 +92,17 @@ export const updateCachedData = () => {
       localStorage.setItem(keys[index], JSON.stringify(response));
     });
   }
-};  
+};
 
 // Update the Cached Data evry 1 minute
 //setInterval(updateCachedData(), 60 * 1000); // 60 * 1000 milsec
 
 // Update the Cached Data In Background
-export const updateRequestedCachedData=(requesteddata)=>{
- // Simple GET request using fetch
- fetch(BaseUrl + requesteddata).then(async( response) => {
+export const updateRequestedCachedData = (requesteddata) => {
+  // Simple GET request using fetch
+  fetch(BaseUrl + requesteddata).then(async (response) => {
+    const data = await response.json();
 
-  const data = await response.json();
- 
-  localStorage.setItem(requesteddata, JSON.stringify(data.abilities));
-});
-}
-
- 
+    localStorage.setItem(requesteddata, JSON.stringify(data.abilities));
+  });
+};

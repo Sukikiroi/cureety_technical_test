@@ -104,24 +104,32 @@ let data = [
 ];
 
 const executionTimeCalculator = (value, compressionTimeoutDelay) => {
-  var start = Date.now();
-
-  // task starts
-
   const compressed = lzwCompress.pack(value);
- 
-  // task ends
 
-  var end = Date.now();
-  console.log(`Execution time: ${end - start} ms`);
-  let ExcutionTime = end - start;
-
-  //When compression takes more than compressionTimeoutDelay
-  if (ExcutionTime > compressionTimeoutDelay)
-    // return the uncompressed data
-    return value;
-  //  if compression is fast  return the Copressed value
-  else return compressed;
+  return compressed;
 };
 
-executionTimeCalculator(data);
+const getdataafterMaxDelay = (compressionTimeoutDelay) => {
+  let testdata;
+  setTimeout(
+    (testdata = executionTimeCalculator(value, compressionTimeoutDelay)),
+    200
+  );
+  console.log(testdata);
+};
+
+
+var compressed;
+export const compressme=(value)=>{
+  compressed = lzwCompress.pack(value);
+  return  compressed
+}
+
+
+
+export const compressedornot = () => {
+  if (compressed == undefined) return data;
+  else return compressed
+};
+
+ 
