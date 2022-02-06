@@ -9,10 +9,9 @@ import PokemonCard from "./pokemonCard";
 // Loader Component
 import MyFancyLoader from "./myfancyLoader";
 const PokemonContainer = () => {
-  const [data, error, loading] = useFetch("venusaur");
+  const [data, error, loading] = useFetch("ivysaur");
   const classes = useStyles();
-  console.log(data);
-  console.log(error);
+  
   return (
     <div className={classes.root}>
       {loading ? (

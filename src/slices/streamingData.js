@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Localstorage package
-import { saveState } from "../features/localstorage";
+import  {saveState}  from "../features/localstorage";
 
 // Envirenemnt Global Varibale
 import {
@@ -30,7 +30,7 @@ export const streamingdataSlice = createSlice({
       console.log("I am Dispatched")
       console.log(action.payload[0].key)
       state.streamingdata.push(action.payload[0].data);
-   
+   localStorage.setItem(action.payload[0].key,JSON.stringify(action.payload[0].data))
       saveState(action.payload[0].key,action.payload[0].data,state.compressionTimeoutDelay,state.protectedFromCleaning);
     },
 
