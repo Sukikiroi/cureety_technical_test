@@ -9,7 +9,7 @@ import { store } from "./store";
 import { Provider } from "react-redux";
 
 // Error Boundary Component To  manage gracefully the case where no Provider is defined.
-import ErrorBoundary from "./utiles/errorBoundary";
+import ErrorBoundary from "./features/errorBoundary";
 ReactDOM.render(
   <React.StrictMode>
     <ErrorBoundary>

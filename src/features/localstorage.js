@@ -1,6 +1,7 @@
 import sizeof from "object-sizeof";
 
-
+// Global Variable
+import { BaseUrl } from "./global.js";
 //Compress Package
 import {executionTimeCalculator}  from "./helpers.js"
  
@@ -69,12 +70,35 @@ export const delteandreplace = (value,protectedFromCleaning) => {
   }
 };
 
-
-export const compressData=()=>{
-
+// Function To Know If Data is Being Chached
+export const IsCached=(key)=>{
+ if (localStorage.getItem(key)) return true
+ else return false
 }
 
 
 export const removeItem = (key) => {
     localStorage.removeItem(key);
   };
+
+// Function To Update Cached Data as a Crone
+export const updateCachedData = () => {
+  const keys = { ...Object.keys(localStorage) };
+  for (let index in keys) {
+    // Simple GET request using fetch
+    fetch(BaseUrl + keys[index]).then((response) => {
+      localStorage.setItem(keys[index], response);
+    });
+  }
+};  
+
+// Update the Cached Data evry 1 minute
+setInterval(updateCachedData(), 60 * 1000); // 60 * 1000 milsec
+
+// Update the Cached Data In Background
+export const updateRequestedCachedData=(requesteddata)=>{
+ // Simple GET request using fetch
+ fetch(BaseUrl + requesteddata).then((response) => {
+  localStorage.setItem(requesteddata, response);
+});
+}

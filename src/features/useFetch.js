@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { addfetchedata } from "../slices/streamingData";
 
 //Global Base Url
-import {BaseUrl} from "./global";
+import { BaseUrl } from "./global";
+
+//  Helper Function
+import { loadState, updateRequestedCachedData, IsCached } from "./localstorage";
 
 const useFetch = (query) => {
   // Streaming Data state as Array
@@ -18,8 +21,8 @@ const useFetch = (query) => {
 
   const dispatch = useDispatch();
 
-  if(query==undefined){
-    query=''
+  if (query == undefined) {
+    query = "";
   }
 
   useEffect(() => {
@@ -42,7 +45,17 @@ const useFetch = (query) => {
         ];
 
         dispatch(addfetchedata(payload));
-        setstreamingData(data);
+
+        // If Data Is Cached we load state from Local Storage
+        if (IsCached) {
+          // Get The Cached Data
+          setstreamingData(loadState(query));
+          // Update The Cached Data In Background
+          updateRequestedCachedData(query);
+        } else {
+          setstreamingData(data);
+        }
+
         setloading(false);
       })
       .catch((error) => {
