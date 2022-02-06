@@ -1,4 +1,4 @@
-export const BaseUrl = "https://pokeapi.co/api/v2/pokemon-species";
+export const BaseUrl = "https://pokeapi.co/api/v2/pokemon/";
 
 // DSL Configuration
 export const authentificationHeader = "";
