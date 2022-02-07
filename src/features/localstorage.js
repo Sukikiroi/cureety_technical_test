@@ -28,9 +28,12 @@ export const saveState = (
 
     compressme(value);
   //Result data May be a Compressed or original Data if Compression Delay it pass 200ms
-    setTimeout(() => {
-      localStorage.setItem(key, JSON.stringify(compressedornot()));
-    }, compressionTimeoutDelay);
+  
+    // setTimeout(() => {
+    //   localStorage.setItem(key, JSON.stringify(compressedornot()));
+    // }, compressionTimeoutDelay);
+
+    localStorage.setItem(key, JSON.stringify(value));
   } catch (error) {
     if (error === "QUOTA_EXCEEDED_ERR") {
       alert("Quota exceeded!"); //data wasn't successfully saved due to quota exceed so throw an error
