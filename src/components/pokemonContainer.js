@@ -1,6 +1,7 @@
 import React from "react";
 
 import { makeStyles } from "@mui/styles";
+ 
 import useFetch from "../features/useFetch";
 
 // Card Component
@@ -9,15 +10,30 @@ import PokemonCard from "./pokemonCard";
 // Loader Component
 import MyFancyLoader from "./myfancyLoader";
 const PokemonContainer = () => {
-  const [data, error, loading] = useFetch("ivysaur");
-  const classes = useStyles();
+   
+
+
+  const [{ patients, cancerOrigins }, isLoading] = useFetch((fetch) => ({
+    patients: fetch("ivysaur"),
+    cancerOrigins: fetch("bulbasaur"),
+  }));
+
+
   
+  if (!isLoading) {
+    console.log(cancerOrigins);
+    
+
+  }
+
+  const classes = useStyles();
+
   return (
     <div className={classes.root}>
-      {loading ? (
+      {(isLoading)? (
         <MyFancyLoader />
       ) : (
-        data.map((item, key) => {
+        cancerOrigins.abilities.map((item, key) => {
           return (
             <div key={key}>
               <PokemonCard />
